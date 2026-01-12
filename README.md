@@ -26,7 +26,7 @@ Clone the repository and install dependencies:
 
 ```bash
 # Clone the repository
-git clone <REPO_URL>
+git clone --bare <REPO_URL>
 cd take-home-tech-test
 
 # Install all dependencies
