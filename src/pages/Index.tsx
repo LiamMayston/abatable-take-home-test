@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Position } from "@/types/portfolio";
 import { PositionsTable } from "@/components/PositionsTable";
 import { useToast } from "@/hooks/use-toast";
+import SummaryCard from "@/components/SummaryCard";
 
 const API_BASE_URL = "http://localhost:4000/api";
 
@@ -43,7 +44,7 @@ const Index = () => {
             Manage and track your carbon credit positions
           </p>
         </div>
-
+        <SummaryCard />
         <div className="space-y-6">
           <div>
             <h2 className="text-2xl font-bold mb-4">Positions</h2>
