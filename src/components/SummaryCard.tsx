@@ -11,8 +11,17 @@ type StatusFilter = 'all' | 'available' | 'retired';
 
 const API_BASE_URL = "http://localhost:4000/api";
 
-const formatNumber = (value: number) =>
-    value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    }).format(value);
+};
+
+const formatNumber = (value: number) => {
+    return new Intl.NumberFormat('en-US').format(value);
+};
 
 const fetchSummary = async (filter: StatusFilter): Promise<PortfolioSummary> => {
     const url = filter === 'all'
@@ -71,7 +80,7 @@ const SummaryCard = () => {
                     <CardContent className="grid grid-cols-3 gap-6 pt-6">
                         <div>
                             <p className="text-sm text-muted-foreground">Total Value</p>
-                            {isLoading ? <Skeleton className="h-6 w-32 mt-1 bg-muted-foreground/20" /> : <p className="text-2xl font-semibold">{`£${formatNumber(summary.totalValue)}`}</p>}
+                            {isLoading ? <Skeleton className="h-6 w-32 mt-1 bg-muted-foreground/20" /> : <p className="text-2xl font-semibold">{`${formatCurrency(summary.totalValue)}`}</p>}
                         </div>
                         <div>
                             <p className="text-sm text-muted-foreground">Total Tonnes</p>
@@ -79,7 +88,7 @@ const SummaryCard = () => {
                         </div>
                         <div>
                             <p className="text-sm text-muted-foreground">Avg. Price per Tonne</p>
-                            {isLoading ? <Skeleton className="h-6 w-32 mt-1 bg-muted-foreground/20" /> : <p className="text-2xl font-semibold">{`£${formatNumber(summary.averagePricePerTonne)}`}</p>}
+                            {isLoading ? <Skeleton className="h-6 w-32 mt-1 bg-muted-foreground/20" /> : <p className="text-2xl font-semibold">{`${formatCurrency(summary.averagePricePerTonne)}`}</p>}
                         </div>
                     </CardContent>
                 </Card>
